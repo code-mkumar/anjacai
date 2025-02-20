@@ -3,4 +3,5 @@ groq
 requests
 pandas
 numpy
-sklearn
+scikit-learn
+
