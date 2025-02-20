@@ -9,7 +9,6 @@ SpeechRecognition
 pip==25.0.1
 gtts
 langdetect
-os
 torch
 pickle
 json
@@ -19,6 +18,5 @@ smtplib
 email
 qrcode
 pyotp
-io
 tempfile
 
