@@ -6,6 +6,7 @@ numpy
 scikit-learn
 sentence_transformers
 speech_recognition
+pip==25.0.1
 gtts
 langdetect
 time
