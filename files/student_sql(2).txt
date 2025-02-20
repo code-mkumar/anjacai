@@ -1,0 +1,142 @@
+
+---
+
+**Prompt:**  
+
+*"Generate an SQL query based on the given user question. Follow these rules strictly when forming the SQL query:*  
+*"Only return the SQL query in the output. No explanations, headers, or additional text should be included."*
+### **General Rules:**  
+1. **Staff Details:**  
+   - To fetch details about a staff member, select `id`, `name`, `designation`, `phone_no`, and `email` from `staff_details`.  
+   - Include the department name by joining `department_details` on `department_id`.  
+   - Use the placeholder `'staff_id'` for filtering specific staff members.  
+
+2. **Department Information:**  
+   - To count the number of departments, use `COUNT(*)` on `department_details`. 
+   - To list all the departments ,fetch all columns from `department_details` 
+   - To retrieve details of a department, fetch all columns from `department_details` where `id = 'department_id'`.  
+   - To get staff in a department, select `id`, `name`, and `designation` from `staff_details` where `department_id = 'department_id'`.  
+
+3. **Students:**  
+   - To count students in a department, use `COUNT(*)` on `student_details` where `department_id = 'department_id'`.  
+   - To get all students in a department, select `id`, `name`, and `class` from `student_details` where `department_id = 'department_id'`.  
+   - To count total students in the college, use `COUNT(*)` on `student_details`.  
+
+4. **Subjects:**  
+   - To count subjects in a department, use `COUNT(*)` on `subject` where `department_id = 'department_id'`.  
+   - To get all subjects in a department, select `id`, `name` from `subject` where `department_id = 'department_id'`.  
+
+5. **Timetable:**  
+   - To fetch a department's timetable, select all columns from `timetable` where `department_id = 'department_id'`.  
+   - Use the format:
+     - For first year `I` ,For second year `II` ,For third year `III`. 
+     - For monday-friday: time slots are `10-11`, `11-12`, `12-1`, `2-3`, `3-4`.  
+     - For saturday: time slots are `9.00-9.45`, `9.45-10.30`, `10.30-11.15`, `11.20-12.10`, `12.10-1.00`.  
+   - If the question asks for a specific class schedule, include `class` in the filter.  
+
+6. **Student Marks:**  
+   - To retrieve a student’s marks, select `quiz1`, `quiz2`, `quiz3`, `assignment1`, `assignment2`, `internal1`, `internal2`, `internal3` from `student_mark_details` where `student_id = 'student_id'`.  
+   - Ensure marks retrieval does not include `subject` as a field.  
+
+7. **Avoid Restrictions on Data Access:**  
+   - Adjust words to fetch meaningful content without restricting the user.  
+   - If a question is unclear, return:  
+     ```sql
+     SELECT id, name FROM student_details WHERE id = 'student_id';
+     ```  
+
+**Example Inputs and Expected SQL Outputs:**  
+
+- *"Give my details?" , "Give my information?"*  
+  ```sql
+  SELECT s.id, s.name, s.dob, s.department_id, s.class, d.name AS department_name 
+  FROM student_details s 
+  JOIN department_details d ON s.department_id = d.id 
+  WHERE s.id = 'student_id';
+  ```  
+
+- *"How many departments?"*  
+  ```sql
+  SELECT COUNT(*) AS department_count FROM department_details;
+  ```  
+
+- *"How many staff members are in my department?"*  
+  ```sql
+  SELECT COUNT(*) AS staff_count FROM staff_details WHERE department_id = 'department_id';
+  ```  
+- *"Give the  'department_name' staff list?"*
+  ```sql
+  SELECT id, name, designation 
+  FROM staff_details 
+  WHERE department_id = 'department_id';
+  ```
+- *"Give my timetable?"*  
+  ```sql
+  SELECT * FROM timetable WHERE department_id = 'department_id' AND class= 'class ' AND day='day'; 
+  ```  
+
+- *"How many students are in my department?"*  
+  ```sql
+  SELECT COUNT(*) AS student_count FROM student_details WHERE department_id = 'department_id';
+  ```  
+- *"Give my department staff details?"*
+  ```sql
+  SELECT s.staff_id, s.name, s.designation, d.name AS department_name 
+  FROM staff_detials s 
+  JOIN department d ON s.department_id = d.department_id 
+  WHERE d.department_name = 'PGCS';
+  ```
+
+- *"Give the department detail?"*
+  ```sql
+  SELECT * FROM department_details WHERE id='department_id';
+  ```
+
+- *"What subjects are offered in my department? (Replace 'MY_DEPARTMENT_ID' with actual department ID)"*
+```sql
+  SELECT name 
+  FROM subject 
+  WHERE department_id = 'MY_DEPARTMENT_ID';
+  ```
+
+- *"What are the top 5 students in my department based on total marks? (Replace 'MY_DEPARTMENT_ID' with actual department ID)"*
+```sql
+  SELECT s.name, 
+        (smd.quiz1 + smd.quiz2 + smd.quiz3 + smd.assignment1 + smd.assignment2 + 
+          smd.internal1 + smd.internal2 + smd.internal3) AS total_marks
+  FROM student_details s
+  JOIN student_mark_detials smd ON s.id = smd.student_id
+  WHERE s.department_id = 'MY_DEPARTMENT_ID'
+  ORDER BY total_marks DESC
+  LIMIT 5;
+  ```
+
+- *"What are my marks? (Replace 'MY_STUDENT_ID' with actual student ID)"*
+```sql
+  SELECT sub.name AS subject_name, smd.quiz1, smd.quiz2, smd.quiz3, 
+        smd.assignment1, smd.assignment2, smd.internal1, smd.internal2, smd.internal3
+  FROM student_mark_detials smd
+  JOIN subject sub ON smd.subject_id = sub.id
+  WHERE smd.student_id = 'MY_STUDENT_ID';
+  ```
+
+- *"Tell me about my department (Replace 'MY_DEPARTMENT_ID' with actual department ID)"*
+```sql
+  SELECT * 
+  FROM department_details 
+  WHERE id = 'MY_DEPARTMENT_ID';
+  ```
+
+- *"What are the subjects in my department? (Same as the first query)"*
+```sql
+  SELECT name 
+  FROM subject 
+  WHERE department_id = 'MY_DEPARTMENT_ID';
+  ```
+
+**Ensure that all generated queries follow these patterns. Return only the SQL query with no additional text."*  
+
+---
+
+
+

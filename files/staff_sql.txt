@@ -1,0 +1,124 @@
+﻿
+only produce the sql query with out any other content must verify the below example queries.
+fetch the below information about the table schema.
+below contents about the structure of the table.
+if any context is not understand just product SELECT id,name from staff_details where id = bind this with below info the add is listed in the below information.
+check the information below and try to give the valid code only.
+structure of the string is id,name,designation,department_id.... in this order of the working user.
+the class are mention in the db in 'I','II','III'
+adjust the words to fetch the content or show the information from that table the user need to know don't restrict the user to view
+***time is mention as '9.00-9.45','9.45-10.30','10.30-11.15','11.20-12.10','12.10-1.00' for 'saturday'***
+
+'''department names with id use the pattern to check the department name
+UGTAMIL: DEPARTMENT OF TAMIL ( BA Tamil,UG Tamil,Bachelor of Arts in Tamil)
+UGHINDI: DEPARTMENT OF HINDI (BA Hindi)
+PART2ENG: DEPARTMENT OF ENGLISH - (BA English)
+UGMAT: DEPARTMENT OF MATHEMATICS - (BSc Mathematics)
+UGPHY: DEPARTMENT OF PHYSICS - (BSc Physics)
+UGCHE: DEPARTMENT OF CHEMISTRY - (BSc Chemistry)
+UGBOT: DEPARTMENT OF BOTANY - (BSc Botany)
+UGZOO: DEPARTMENT OF ZOOLOGY - (BSc Zoology)
+UGPHS: DEPARTMENT OF PHYSICAL (EDUCATION, HEALTH EDUCATION AND SPORTS - BSc Physical Education)
+UGECO: DEPARTMENT OF ECONOMICS - (BA Economics)
+UGCOM: DEPARTMENT OF COMMERCE - (BCom Commerce)
+UGBBAR: DEPARTMENT OF BUSINESS ADMINISTRATION-(R) - (BBA Business Administration)
+UGMICRO: DEPARTMENT OF MICROBIOLOGY - (BSc Microbiology)
+PGMICRO: DEPARTMENT OF MICROBIOLOGY - (MSc Microbiology)
+UGBIOTECH: DEPARTMENT OF BIOTECHNOLOGY - (BSc Biotechnology)
+PGBIOTECH: DEPARTMENT OF BIOTECHNOLOGY - (MSc Biotechnology)
+UGVISCOM: DEPARTMENT OF VISUAL COMMUNICATION - (BSc Visual Communication)
+UGCSSF: DEPARTMENT OF COMPUTER SCIENCE-(SF) - (BSc Computer Science (SF))
+UGBCA: DEPARTMENT OF COMPUTER APPLICATION - (BCA Computer Applications)
+UGPHSSF: DEPARTMENT OF PHYSICAL EDUCATION, HEALTH EDUCATION AND SPORTS - (BSc Physical Education)
+UGENG: DEPARTMENT OF ENGLISH - (BA English)
+UGCCS: DEPARTMENT OF COMMERCE CORPORATE SECRETARYSHIP - (BCom Corporate Secretaryship)
+PGCOM: DEPARTMENT OF COMMERCE - (MCom Commerce)
+UGBBASF: DEPARTMENT OF BUSINESS ADMINISTRATION -(SF) - (BBA Business Administration (SF))
+PGTAMIL: DEPARTMENT OF TAMIL - (MA Tamil)
+PGMAT: DEPARTMENT OF MATHEMATICS - (MSc Mathematics)
+PGPHY: DEPARTMENT OF PHYSICS - (MSc Physics)
+PGCHE: DEPARTMENT OF CHEMISTRY - (MSc Chemistry)
+PGBOT: DEPARTMENT OF BOTANY - (MSc Botany)
+PGZOO: DEPARTMENT OF ZOOLOGY - (MSc Zoology)
+PGCS: DEPARTMENT OF COMPUTER SCIENCE PG - (MSc Computer Science)
+PGMCA: DEPARTMENT OF COMPUTER APPLICATION - (MCA Computer Applications)
+PGECO: DEPARTMENT OF ECONOMICS - (MA Economics)
+UGCSR: DEPARTMENT OF COMPUTER SCIENCE UG - (BSc Computer Science)
+UGCOMEC: DEPARTMENT OF COMMERCE (UG-CA & EC) (PG - CA) - (BCom Commerce (UG-CA & EC))
+UGCPA: Department of Commerce Professional Accounting (SF) - (BCom Professional Accounting)'''
+
+'''day in the format of 'monday','tuesday','wednesday','thrusday','friday','saturday' in the database 
+***time is ,mention as '10-11','11-12','12-1','2-3','3-4' for 'monday','tuesday','wednesday','thrusday','friday'.***
+sunday is holiday.'''
+
+''' dont take 'subject' as a attribute or field to fetch from the table'''
+
+
+Tables Overview
+student_details
+Columns:
+* id: TEXT, PRIMARY KEY
+* name: TEXT, NOT NULL
+* dob: DATE, NOT NULL
+* department_id: TEXT, NOT NULL
+* class: TEXT, NOT NULL
+
+***student_mark_details***
+Columns:
+* id: TEXT, PRIMARY KEY
+* subject_id: TEXT, NOT NULL
+* student_id: TEXT, NOT NULL
+* quiz1 FLOAT,
+* quiz2 FLOAT,
+* quiz3 FLOAT,
+* assignment1 FLOAT,
+* assignment2 FLOAT,
+* internal1 FLOAT,
+* internal2 FLOAT,
+* internal3 FLOAT
+
+
+staff_details
+Columns:
+* id: TEXT, PRIMARY KEY
+* name: TEXT, NOT NULL
+* designation: TEXT, NOT NULL
+* department_id: TEXT, NOT NULL
+* password: TEXT, NOT NULL, DEFAULT pass_staff
+* mfa: BOOLEAN, DEFAULT 0
+* secd: TEXT, DEFAULT NONE
+* phone_no: INTEGER, NOT NULL
+* email: TEXT, NOT NULL, UNIQUE
+
+department_details
+Columns:
+* id: TEXT, PRIMARY KEY
+* name: TEXT, NOT NULL
+* grad_level: TEXT, NOT NULL
+* phone: TEXT, NOT NULL
+
+subject
+Columns:
+* id: TEXT, PRIMARY KEY
+* department_id: INTEGER, NOT NULL
+* name: TEXT, NOT NULL
+
+timetable
+Columns:
+* id: INTEGER, PRIMARY KEY, AUTOINCREMENT
+* day: TEXT, NOT NULL
+* time: TEXT, NOT NULL
+* subject: TEXT, NOT NULL
+* class: TEXT, NOT NULL
+* department_id: INTEGER, NOT NULL
+
+Relationships Summary
+
+1. student_details ↔ department_details: Each student belongs to a department
+
+2. staff_details ↔ department_details: Staff members are assigned to departments
+
+3. subject ↔ department_details: Subjects are linked to departments.
+
+4. timetable ↔ department_details: Timetables are specific to departments and classes.
+

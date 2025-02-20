@@ -1,0 +1,4 @@
+---
+**Department Name:** DEPARTMENT OF PHYSICS
+                **Type:** UG
+                **phone no:** 1
