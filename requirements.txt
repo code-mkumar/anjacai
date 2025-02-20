@@ -10,12 +10,7 @@ pip==25.0.1
 gtts
 langdetect
 torch
-json
-random
-datetime
-smtplib
-email
 qrcode
 pyotp
-tempfile
+
 
