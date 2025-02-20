@@ -5,7 +5,7 @@ pandas
 numpy
 scikit-learn
 sentence_transformers
-speech_recognition
+SpeechRecognition
 pip==25.0.1
 gtts
 langdetect
