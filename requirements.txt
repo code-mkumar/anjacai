@@ -9,7 +9,6 @@ SpeechRecognition
 pip==25.0.1
 gtts
 langdetect
-time
 os
 torch
 pickle
