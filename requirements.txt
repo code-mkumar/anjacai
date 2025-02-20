@@ -10,7 +10,6 @@ pip==25.0.1
 gtts
 langdetect
 torch
-pickle
 json
 random
 datetime
