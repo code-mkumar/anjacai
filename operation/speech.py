@@ -22,30 +22,31 @@ def speak_text(text):
         # Use st.audio to play automatically
         st.audio(temp_file.name, format="audio/mp3", autoplay=True)
 
+import torchaudio.backend.sox_io_backend
+import soundfile as sf
+# Ensure the correct backend is used
+torchaudio.set_audio_backend("soundfile")  # Use "sox_io" if supported
 
-def recognize_speech():
-    """Capture voice input using torchaudio and convert to text."""
+def recognize_speech(audio_file):
+    """Transcribe audio from file using SpeechRecognition."""
     recognizer = sr.Recognizer()
 
-    # Use a pre-recorded file instead of Microphone (Streamlit Cloud limitation)
-    audio_file = "recorded_audio.wav"
-
     try:
-        # Load audio using torchaudio
-        waveform, sample_rate = torchaudio.load(audio_file)
+        # Load audio using soundfile (alternative to torchaudio)
+        waveform, sample_rate = sf.read(audio_file)
 
-        # Save it as a WAV file for recognition
-        torchaudio.save("temp_audio.wav", waveform, sample_rate)
+        # Save it as a WAV file for SpeechRecognition
+        sf.write("temp_audio.wav", waveform, sample_rate)
 
-        # Use speech_recognition to transcribe the saved file
+        # Use SpeechRecognition
         with sr.AudioFile("temp_audio.wav") as source:
             audio = recognizer.record(source)
             text = recognizer.recognize_google(audio)
 
         return text
     except sr.UnknownValueError:
-        return ""
+        return "Sorry, I couldn't understand. Please try again."
     except sr.RequestError:
-        return ""
+        return "Speech service is unavailable."
     except Exception as e:
         return f"Error: {e}"
