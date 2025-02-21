@@ -1,6 +1,7 @@
 import streamlit as st
 import genai.gemini
 import genai.lama
+import genai.lama_copy
 import operation
 import operation.dboperation
 # import operation.fileoperations
@@ -159,7 +160,7 @@ def welcome_page():
             student_info += f" {key} is '{val}'"
         print(student_info)
         combined_prompt = operation.preprocessing.create_combined_prompt(f" \nuser needed department_id :{department_id_in_user_query}"+student_info, sql_content)
-        response = genai.lama.retrive_sql_query(question,combined_prompt)
+        response = genai.lama_copy.retrive_sql_query(question,combined_prompt)
 
         # Display the SQL query
         # st.write("Generated SQL Query:", response)
@@ -193,7 +194,7 @@ def welcome_page():
         #     print(query)
         #     data_sql = operation.dboperation.read_sql_query(query)
         if len(data_sql)==0 or 'error' in data_sql: 
-            new_query=genai.lama.backup_sql_query_maker("give the proper sql query without any explaination and other things ended with semicolon. "+combined_prompt,question,data_sql,response)
+            new_query=genai.lama_copy.backup_sql_query_maker("give the proper sql query without any explaination and other things ended with semicolon. "+combined_prompt,question,data_sql,response)
             print(new_query)
             raw_query = str(new_query)
             formatted_query = raw_query.replace("sql", "").strip("'''").strip()
@@ -226,7 +227,7 @@ def welcome_page():
         from datetime import datetime
         current_datetime = datetime.now()
         # answer = genai.lama.query_lm_studio(question,f"STUDENT detail {student_info}  prompt:{role_prompt} Answer this question: {question} and the inforation is needed {context}")
-        answer = genai.lama.query_lm_studio(question,f"""Please interact with the user without ending the communication prematurely dont restrict the user. 
+        answer = genai.lama_copy.query_lm_studio(question,f"""Please interact with the user without ending the communication prematurely dont restrict the user. 
         Use the following  {student_info} use the word according to or dear statement must be in formal english. 
         current date and time  {current_datetime.strftime("%A, %B %d, %Y, at %I:%M %p").lower()} and {current_datetime.now()}.
         Format your response based on this role prompt don't provide the content inside it {role_prompt} . 
