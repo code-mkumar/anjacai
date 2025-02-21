@@ -194,7 +194,7 @@ def staff_page():
                 staff_info += f" {key} is '{val}'. "
             combined_prompt = operation.preprocessing.create_combined_prompt(staff_info ,sql_content)
             print(staff_info)
-            response = genai.lama.retrive_sql_query(question,combined_prompt)
+            response = genai.lama_copy.retrive_sql_query(question,combined_prompt)
             # st.write(response)
             # Display the SQL query
             # st.write("Generated SQL Query:", response)
@@ -232,7 +232,7 @@ def staff_page():
             #     print(query)
             #     data_sql = operation.dboperation.read_sql_query(query)
             if len(data_sql)==0 or 'error' in data_sql: 
-                new_query=genai.lama.backup_sql_query_maker("give the proper sql query without any explaination and other things ended with semicolon. "+combined_prompt,question,data_sql,response)
+                new_query=genai.lama_copy.backup_sql_query_maker("give the proper sql query without any explaination and other things ended with semicolon. "+combined_prompt,question,data_sql,response)
                 print(new_query)
                 raw_query = str(new_query)
                 formatted_query = raw_query.replace("sql", "").strip("'''").strip()
