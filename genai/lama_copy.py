@@ -169,7 +169,7 @@ def retrive_sql_query(prompt, context):
         return None
     try:
         query_model[model]-=1
-       response=''
+        response=''
         for chunk in completion:  # Assuming `completion` is iterable
             try:
                 # json_data = json.loads(chunk)
