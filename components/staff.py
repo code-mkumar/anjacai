@@ -258,7 +258,7 @@ def staff_page():
             from datetime import datetime
             current_datetime = datetime.now()
             # Address the user's question by utilizing the database information provided: {str(data_sql)} format and give this. 
-            answer = genai.lama.query_lm_studio(question,
+            answer = genai.lama_copy.query_lm_studio(question,
     f"""Please interact with the user without ending the communication prematurely dont restrict the user. 
     Use the following  {staff_info} use the word according to or dear statement must be in formal english. 
     current date and time  {current_datetime.strftime("%A, %B %d, %Y, at %I:%M %p").lower()} and {current_datetime.now()}.
