@@ -146,8 +146,8 @@ def guest_page():
                 
                 # Display the length of the new relevant chunks
                 #st.write("New relevant chunk size:", len(" ".join(relevant_chunks)))
-                st.info("New relevant chunks:")
-                st.info(" ".join(relevant_chunks))
+                #st.info("New relevant chunks:")
+                #st.info(" ".join(relevant_chunks))
                 
                 # Update the chunk size for the next iteration
                 rel_chunk_size = len("\n\n".join(relevant_chunks))  # Size in characters
