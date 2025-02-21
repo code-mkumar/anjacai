@@ -108,7 +108,7 @@ def guest_page():
         
         # chunks=operation.preprocessing.chunk_text(str(info))
         chunks = operation.preprocessing.chunk_text_by_special_character(str(info))
-        st.write(chunks)
+        #st.write(chunks)
         # st.write(chunks)
         st.write(f"Hello, {st.session_state.username}!")
         # chunks = operation.preprocessing.chunk_text(f"{collegehistory}\n{departmenthistory}")
