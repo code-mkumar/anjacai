@@ -15,7 +15,7 @@ client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 # LM Studio API endpoint
 LM_STUDIO_API_URL = "http://127.0.0.1:1234/v1/chat/completions"
 
-sql_model = {"llama-3.2-1b-instruct":0, "llama-3.2-1b-instruct:2":0}
+sql_model = {"llama-3.1-8b-instant":0, "llama-3.1-8b-instant":0}
 # query_model = ["meta-llama-3.1-8b-instruct@q4_k_m", "meta-llama-3.1-8b-instruct@q4_k_m:2", "meta-llama-3.1-8b-instruct@q4_k_m:3"]
 query_model = {
     "llama-3.1-8b-instant":0,
@@ -150,24 +150,26 @@ def retrive_sql_query(prompt, context):
 
     prompt_role = 'student counsellor' if formatted_role == 'student' else 'staff assistant'
     context_with_datetime = f"{context} Today’s date and time: {formatted_datetime}."
-
-    headers = {"Content-Type": "application/json"}
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": f"You are a helpful {prompt_role}."},
-            {"role": "user", "content": f"Context: {context_with_datetime}\n\nQuestion: {prompt}"}
-        ],
-        "temperature": 0.7,
-        "max_tokens": 2000,
-    }
-
+    client = Groq(api_key="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")  # Ensure API key is set if required
     try:
-        response = requests.post(LM_STUDIO_API_URL, headers=headers, json=payload)
-        response.raise_for_status()  # Check for HTTP errors
-        response_data = response.json()
+        completion = client.chat.completions.create(
+            model=model,
+            messages=[
+               {"role": "system", "content": f"You are a helpful sql query developer."},
+            {"role": "user", "content": f"Context: {context_with_datetime}\n\nQuestion: {prompt}"}
+            ],
+            temperature=1,
+            max_completion_tokens=1024,
+            top_p=1,
+            stream=True
+        )
+   
+    except Exception as e:
+        st.error(f"Request failed: {e}")
+        return None
+    try:
         query_model[model]-=1
-        return response_data["choices"][0]["message"]["content"]
+        return completion.choices[0].message.content if response.choices else None
     except requests.RequestException as e:
         st.error(f"Request failed: {e}")
         return None
@@ -188,25 +190,27 @@ def backup_sql_query_maker(context,prompt,sql_data,query):
 
     prompt_role = 'student counsellor' if formatted_role == 'student' else 'staff assistant'
     context_with_datetime = f"{context} Today’s date and time: {formatted_datetime}."
-
-    headers = {"Content-Type": "application/json"}
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": f"You are a helpful {prompt_role}."},
-            {"role": "user", "content": f"Context: {context_with_datetime}\n\nQuestion: {prompt}\n\nworng query:{query}\n\nwrong answer:{sql_data}"}
-        ],
-        "temperature": 0.7,
-        "max_tokens": 2000,
-    }
-
+    client = Groq(api_key="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")  # Ensure API key is set if required
     try:
-        response = requests.post(LM_STUDIO_API_URL, headers=headers, json=payload)
-        response.raise_for_status()  # Check for HTTP errors
-        response_data = response.json()
-        sql_model[model]-=1
-        return response_data["choices"][0]["message"]["content"]
-    except requests.RequestException as e:
+        completion = client.chat.completions.create(
+            model=model,
+            messages=[
+               {"role": "system", "content": f"You are a helpful sql query developer."},
+               {"role": "user", "content": f"Context: {context_with_datetime}\n\nQuestion: {prompt}\n\nworng query:{query}\n\nwrong answer:{sql_data}"}
+            ],
+            temperature=1,
+            max_completion_tokens=1024,
+            top_p=1,
+            stream=True
+        )
+   
+    except Exception as e:
+        st.error(f"Request failed: {e}")
+        return None
+    try:
+        query_model[model]-=1
+        return completion.choices[0].message.content if response.choices else None
+    except Exception as e:
         st.error(f"Request failed: {e}")
         return None
 
