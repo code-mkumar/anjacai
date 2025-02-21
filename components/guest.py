@@ -122,7 +122,7 @@ def guest_page():
         # chunks = operation.preprocessing.chunk_text(f"{collegehistory}\n{departmenthistory}")
         # question = st.chat_input("Ask your question")
         if st.button("🎤 Speak your question"):
-            spoken_question = operation.speech.recognize_speech()
+            spoken_question = operation.speech.record_and_transcribe()
             st.text(f"You said: {spoken_question}")
         else:
             spoken_question = ""
