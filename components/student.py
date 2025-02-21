@@ -137,16 +137,16 @@ def welcome_page():
     #question1 = st.text_area('Input your question:', key='input',on_change=process_and_clear)
     # submit = st.button('Ask the question')
     
-    if st.button("🎤 Speak your question"):
-        pass
-        # spoken_question = operation.speech.record_and_transcribe()
-        # st.text(f"You said: {spoken_question}")
-    else:
-        spoken_question = ""
+    # if st.button("🎤 Speak your question"):
+    #     pass
+    #     # spoken_question = operation.speech.record_and_transcribe()
+    #     # st.text(f"You said: {spoken_question}")
+    # else:
+    #     spoken_question = ""
 
     # Text Input
     # question = st.chat_input("Ask your question") or spoken_question
-    if question := st.chat_input("Ask your question") or spoken_question:
+    if question := st.chat_input("Ask your question") :
         #st.write("**ANJAC AI can make mistakes. Check important info.**")
         st.markdown("**:red[ANJAC AI can make mistakes. Check important info.]**")
     if question:
