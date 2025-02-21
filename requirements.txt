@@ -12,6 +12,6 @@ langdetect
 torch
 qrcode
 pyotp
-pyaudio
+torchaudio
 
 
