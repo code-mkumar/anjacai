@@ -172,7 +172,7 @@ def staff_page():
         # submit = st.button('Ask the question')
 
         if st.button("🎤 Speak your question"):
-            spoken_question = operation.speech.recognize_speech()
+            spoken_question = operation.speech.record_and_transcribe()
             if 'sorry' in spoken_question:
                 spoken_question=''
             st.text(f"You said: {spoken_question}")
