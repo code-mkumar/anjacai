@@ -181,7 +181,7 @@ def staff_page():
 
         # Text Input
         # question = st.chat_input("Ask your question") or spoken_question
-        if question := st.chat_input("Ask your question") or spoken_question:
+        if question := st.chat_input("Ask your question") :
             #st.write("**ANJAC AI can make mistakes. Check important info.**")
             st.markdown("**:red[ANJAC AI can make mistakes. Check important info.]**")
         if question:
