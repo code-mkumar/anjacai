@@ -1,6 +1,7 @@
 import streamlit as st
 import genai.gemini
 import genai.lama
+import genai.lama_copy
 import operation
 # import operation.dboperation
 import operation.dboperation
