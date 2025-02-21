@@ -44,8 +44,8 @@ def recognize_speech():
 
         return text
     except sr.UnknownValueError:
-        return "Sorry, I couldn't understand. Please try again."
+        return ""
     except sr.RequestError:
-        return "Speech service is unavailable."
+        return ""
     except Exception as e:
         return f"Error: {e}"
