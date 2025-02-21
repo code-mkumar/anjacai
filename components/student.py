@@ -138,7 +138,8 @@ def welcome_page():
     # submit = st.button('Ask the question')
     
     if st.button("🎤 Speak your question"):
-        spoken_question = operation.speech.record_and_transcribe()
+        pass
+        # spoken_question = operation.speech.record_and_transcribe()
         # st.text(f"You said: {spoken_question}")
     else:
         spoken_question = ""
