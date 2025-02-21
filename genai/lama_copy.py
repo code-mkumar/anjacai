@@ -169,11 +169,17 @@ def retrive_sql_query(prompt, context):
         return None
     try:
         query_model[model]-=1
-        response=''
-        for chunk in completion:
-            response+=completion.choices[0].message.content
+       response=''
+        for chunk in completion:  # Assuming `completion` is iterable
+            try:
+                # json_data = json.loads(chunk)
+                content = chunk.choices[0].delta.content  # ✅ Accessing attribute correctly
+                if content:
+                    response += content
+            except json.JSONDecodeError:
+                continue
         return response
-    except requests.RequestException as e:
+    except Exception as e:
         st.error(f"Request failed: {e}")
         return None
 def backup_sql_query_maker(context,prompt,sql_data,query):
@@ -213,8 +219,14 @@ def backup_sql_query_maker(context,prompt,sql_data,query):
     try:
         query_model[model]-=1
         response=''
-        for chunk in completion:
-            response+=completion.choices[0].message.content
+        for chunk in completion:  # Assuming `completion` is iterable
+            try:
+                # json_data = json.loads(chunk)
+                content = chunk.choices[0].delta.content  # ✅ Accessing attribute correctly
+                if content:
+                    response += content
+            except json.JSONDecodeError:
+                continue
         return response
     except Exception as e:
         st.error(f"Request failed: {e}")
@@ -263,7 +275,7 @@ def query_lm_studio(prompt, context):
                 for chunk in completion:  # Assuming `completion` is iterable
                     try:
                         # json_data = json.loads(chunk)
-                        content = content = chunk.choices[0].delta.content  # ✅ Accessing attribute correctly
+                        content = chunk.choices[0].delta.content  # ✅ Accessing attribute correctly
                         if content:
                             content_accumulated += content
                             content_placeholder.markdown(content_accumulated)
