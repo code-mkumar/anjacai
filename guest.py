@@ -120,7 +120,7 @@ def guest_page():
         
         if question:
             # Retrieve relevant chunks
-            st.chat_message('user').markdown(question)
+            #st.chat_message('user').markdown(question)
             k = 3  
             keywords = ['more', 'most', 'details', 'full information']
             if any(keyword in question.lower() for keyword in keywords):
