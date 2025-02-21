@@ -130,9 +130,9 @@ def guest_page():
             relevant_chunks = operation.preprocessing.get_relevant_chunks(question, chunks, k, previous)
 
             # Display the relevant chunks and their size
-            st.write(relevant_chunks)
+            #st.write(relevant_chunks)
             rel_chunk_size = len("\n\n".join(relevant_chunks))  # Size in characters
-            st.write("Size:", rel_chunk_size)
+            #st.write("Size:", rel_chunk_size)
             n=500
             # While the size exceeds the threshold, keep splitting and processing
             while rel_chunk_size > 2000:
@@ -145,7 +145,7 @@ def guest_page():
                 relevant_chunks = operation.preprocessing.get_relevant_chunks_re(question, rechunk)
                 
                 # Display the length of the new relevant chunks
-                st.write("New relevant chunk size:", len(" ".join(relevant_chunks)))
+                #st.write("New relevant chunk size:", len(" ".join(relevant_chunks)))
                 st.info("New relevant chunks:")
                 st.info(" ".join(relevant_chunks))
                 
