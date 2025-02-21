@@ -23,39 +23,39 @@ def speak_text(text):
         st.audio(temp_file.name, format="audio/mp3", autoplay=True)
         
 
-import torchaudio.backend.sox_io_backend
-import sounddevice as sd
-import numpy as np
-import scipy.io.wavfile as wav
+# import torchaudio.backend.sox_io_backend
+# import sounddevice as sd
+# import numpy as np
+# import scipy.io.wavfile as wav
 
 
-def record_and_transcribe(duration=5, sample_rate=44100):
-    """Records audio from the microphone, processes it with torchaudio, and transcribes it."""
-    st.info(f"Recording for {duration} seconds... Speak now!")
+# def record_and_transcribe(duration=5, sample_rate=44100):
+#     """Records audio from the microphone, processes it with torchaudio, and transcribes it."""
+#     st.info(f"Recording for {duration} seconds... Speak now!")
 
-    # Step 1: Record Audio
-    audio_data = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype=np.int16)
-    sd.wait()  # Wait for recording to finish
-    wav.write("recorded_audio.wav", sample_rate, audio_data)
-    st.success("Recording complete!")
+#     # Step 1: Record Audio
+#     audio_data = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype=np.int16)
+#     sd.wait()  # Wait for recording to finish
+#     wav.write("recorded_audio.wav", sample_rate, audio_data)
+#     st.success("Recording complete!")
 
-    # Step 2: Load with Torchaudio
-    recognizer = sr.Recognizer()
-    try:
-        waveform, sample_rate = torchaudio.load("recorded_audio.wav")
+#     # Step 2: Load with Torchaudio
+#     recognizer = sr.Recognizer()
+#     try:
+#         waveform, sample_rate = torchaudio.load("recorded_audio.wav")
 
-        # Save the processed file for SpeechRecognition
-        torchaudio.save("temp_audio.wav", waveform, sample_rate)
+#         # Save the processed file for SpeechRecognition
+#         torchaudio.save("temp_audio.wav", waveform, sample_rate)
 
-        # Step 3: Transcribe using SpeechRecognition
-        with sr.AudioFile("temp_audio.wav") as source:
-            audio = recognizer.record(source)
-            text = recognizer.recognize_google(audio)
+#         # Step 3: Transcribe using SpeechRecognition
+#         with sr.AudioFile("temp_audio.wav") as source:
+#             audio = recognizer.record(source)
+#             text = recognizer.recognize_google(audio)
 
-        return text
-    except sr.UnknownValueError:
-        return "Sorry, I couldn't understand. Please try again."
-    except sr.RequestError:
-        return "Speech service is unavailable."
-    except Exception as e:
-        return f"Error: {e}"
+#         return text
+#     except sr.UnknownValueError:
+#         return "Sorry, I couldn't understand. Please try again."
+#     except sr.RequestError:
+#         return "Speech service is unavailable."
+#     except Exception as e:
+#         return f"Error: {e}"
