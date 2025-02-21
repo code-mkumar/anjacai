@@ -21,24 +21,33 @@ def speak_text(text):
         tts.save(temp_file.name)
         # Use st.audio to play automatically
         st.audio(temp_file.name, format="audio/mp3", autoplay=True)
+        
 
 import torchaudio.backend.sox_io_backend
-import soundfile as sf
-# Ensure the correct backend is used
-torchaudio.set_audio_backend("soundfile")  # Use "sox_io" if supported
+import sounddevice as sd
+import numpy as np
+import scipy.io.wavfile as wav
 
-def recognize_speech(audio_file):
-    """Transcribe audio from file using SpeechRecognition."""
+
+def record_and_transcribe(duration=5, sample_rate=44100):
+    """Records audio from the microphone, processes it with torchaudio, and transcribes it."""
+    st.info(f"Recording for {duration} seconds... Speak now!")
+
+    # Step 1: Record Audio
+    audio_data = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype=np.int16)
+    sd.wait()  # Wait for recording to finish
+    wav.write("recorded_audio.wav", sample_rate, audio_data)
+    st.success("Recording complete!")
+
+    # Step 2: Load with Torchaudio
     recognizer = sr.Recognizer()
-
     try:
-        # Load audio using soundfile (alternative to torchaudio)
-        waveform, sample_rate = sf.read(audio_file)
+        waveform, sample_rate = torchaudio.load("recorded_audio.wav")
 
-        # Save it as a WAV file for SpeechRecognition
-        sf.write("temp_audio.wav", waveform, sample_rate)
+        # Save the processed file for SpeechRecognition
+        torchaudio.save("temp_audio.wav", waveform, sample_rate)
 
-        # Use SpeechRecognition
+        # Step 3: Transcribe using SpeechRecognition
         with sr.AudioFile("temp_audio.wav") as source:
             audio = recognizer.record(source)
             text = recognizer.recognize_google(audio)
