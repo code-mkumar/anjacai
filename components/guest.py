@@ -135,14 +135,14 @@ def guest_page():
         
         if question:
             # Retrieve relevant chunks
-            st.chat_message('user').markdown(question)
+            #st.chat_message('user').markdown(question)
             k = 3  
             keywords = ['more', 'most', 'details', 'full information']
             if any(keyword in question.lower() for keyword in keywords):
                 k = 3 
             previous = ",".join(qa_item["question"] for qa_item in st.session_state.qa_list)
             relevant_chunks = operation.preprocessing.get_relevant_chunks(question, chunks,k,previous)
-            st.write(relevant_chunks)
+            #st.write(relevant_chunks)
             rel_chunk_size = len("\n\n".join(relevant_chunks))  # Size in characters
             # st.write("Size:", rel_chunk_size)
             chunk_Size=500
