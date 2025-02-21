@@ -171,13 +171,13 @@ def staff_page():
         current_datetime = datetime.now()
         # submit = st.button('Ask the question')
 
-        if st.button("🎤 Speak your question"):
-            spoken_question = operation.speech.record_and_transcribe()
-            if 'sorry' in spoken_question:
-                spoken_question=''
-            st.text(f"You said: {spoken_question}")
-        else:
-            spoken_question = ""
+        # if st.button("🎤 Speak your question"):
+        #     spoken_question = operation.speech.record_and_transcribe()
+        #     if 'sorry' in spoken_question:
+        #         spoken_question=''
+        #     st.text(f"You said: {spoken_question}")
+        # else:
+        #     spoken_question = ""
 
         # Text Input
         # question = st.chat_input("Ask your question") or spoken_question
