@@ -169,7 +169,10 @@ def retrive_sql_query(prompt, context):
         return None
     try:
         query_model[model]-=1
-        return completion.choices[0].message.content if response.choices else None
+        response=''
+        for chunk in completion:
+            response+=completion.choices[0].message.content
+        return response
     except requests.RequestException as e:
         st.error(f"Request failed: {e}")
         return None
@@ -209,7 +212,10 @@ def backup_sql_query_maker(context,prompt,sql_data,query):
         return None
     try:
         query_model[model]-=1
-        return completion.choices[0].message.content if response.choices else None
+        response=''
+        for chunk in completion:
+            response+=completion.choices[0].message.content
+        return response
     except Exception as e:
         st.error(f"Request failed: {e}")
         return None
