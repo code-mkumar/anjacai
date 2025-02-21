@@ -138,8 +138,8 @@ def guest_page():
             while rel_chunk_size > 2000:
                 # Split the current relevant chunks into smaller parts
                 rechunk = operation.preprocessing.chunk_text("\n\n".join(relevant_chunks),n)
-                st.info("Rechunked text:")
-                st.info(rechunk)
+                #st.info("Rechunked text:")
+                #st.info(rechunk)
                 
                 # Get the new relevant chunks after rechunking
                 relevant_chunks = operation.preprocessing.get_relevant_chunks_re(question, rechunk)
@@ -166,7 +166,7 @@ def guest_page():
             # Query LM Studio for the answer
             
                 
-            result_text = genai.lama.query_lm_studio(question,context)          
+            result_text = genai.lama_copy.query_lm_studio(question,context)          
             # Store the question and answer in session state
             st.session_state.qa_list.append({'question': question, 'answer': result_text})
             # st.rerun()
