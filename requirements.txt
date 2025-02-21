@@ -14,4 +14,7 @@ qrcode
 pyotp
 torchaudio
 soundfile
+sounddevice
+scipy
+
 
