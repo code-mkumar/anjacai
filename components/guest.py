@@ -121,15 +121,15 @@ def guest_page():
         st.write(f"Hello, {st.session_state.username}!")
         # chunks = operation.preprocessing.chunk_text(f"{collegehistory}\n{departmenthistory}")
         # question = st.chat_input("Ask your question")
-        if st.button("🎤 Speak your question"):
-            spoken_question = operation.speech.record_and_transcribe()
-            st.text(f"You said: {spoken_question}")
-        else:
-            spoken_question = ""
+        # if st.button("🎤 Speak your question"):
+        #     spoken_question = operation.speech.record_and_transcribe()
+        #     st.text(f"You said: {spoken_question}")
+        # else:
+        #     spoken_question = ""
 
         # Text Input
         # question = st.chat_input("Ask your question") or spoken_question
-        if question := st.chat_input("Ask your question") or spoken_question:
+        if question := st.chat_input("Ask your question") :
             #st.write("**ANJAC AI can make mistakes. Check important info.**")
             st.markdown("**:red[ANJAC AI can make mistakes. Check important info.]**")
         
