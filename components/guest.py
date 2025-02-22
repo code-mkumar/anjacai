@@ -132,7 +132,7 @@ def guest_page():
         if question := st.chat_input("Ask your question") :
             #st.write("**ANJAC AI can make mistakes. Check important info.**")
             st.markdown("**:red[ANJAC AI can make mistakes. Check important info.]**")
-        
+        st.write(question)
         if question:
             # Retrieve relevant chunks
             #st.chat_message('user').markdown(question)
