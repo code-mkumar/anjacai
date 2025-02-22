@@ -156,9 +156,9 @@
 
 - *"What are my marks? (Replace 'MY_STUDENT_ID' with actual student ID)"*
 ```sql
-  SELECT sub.name AS subject_name, smd.quiz1, smd.quiz2, smd.quiz3, 
-        smd.assignment1, smd.assignment2, smd.internal1, smd.internal2, smd.internal3
-  FROM student_mark_detials smd
+  SELECT sub.name AS subject_name, smd.quiz1 as quiz1, smd.quiz2 as quiz2, smd.quiz3 as quiz3, 
+        smd.assignment1 as assignment1, smd.assignment2 as assignment2, smd.internal1 as internal1, smd.internal2 as internal2, smd.internal3 as internal3
+  FROM student_mark_details smd
   JOIN subject sub ON smd.subject_id = sub.id
   WHERE smd.student_id = 'MY_STUDENT_ID';
   ```
