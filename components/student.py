@@ -174,7 +174,7 @@ def welcome_page():
         response=str(single_line_query).replace("\n","")
         if ";" not in response:
             response = response + ";"
-        print(response)
+        st.write(response)
         data_sql = operation.dboperation.read_sql_query(response)
         # if len(data_sql)==0:
         #     print("done")
