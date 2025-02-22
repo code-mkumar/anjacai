@@ -11,7 +11,10 @@ from groq import Groq
 os.environ["GROQ_API_KEY"] = "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"
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
+model_with_apikey={
+    "llama-3.3-70b-versatile":"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",
+    "llama-3.2-3b-preview":"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"
+}
 # LM Studio API endpoint
 LM_STUDIO_API_URL = "http://127.0.0.1:1234/v1/chat/completions"
 
