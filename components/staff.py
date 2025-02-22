@@ -208,7 +208,7 @@ def staff_page():
             response=str(single_line_query).replace("\n","")
             if ";" not in response:
                 response = response + ";"
-            print(response)
+            st.write(response)
 
 
             # Query the database
@@ -272,7 +272,7 @@ def staff_page():
             # st.chat_message('assistant').markdown(result_text)
             # Store the question and answer in session state
             st.session_state.qa_list.append({'question': question, 'answer': result_text})
-            st.rerun()
+            #st.rerun()
         
         if len(st.session_state.qa_list):
             last_qa = st.session_state.qa_list[-1]  # Get the last Q&A pair
