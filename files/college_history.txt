@@ -4188,3 +4188,7 @@ The campus has four in-house student hostel halls for both genders.
 ---
 ===Sports===
 A 16-station multi-gym facility has been developed. In addition to this, the campus includes four volleyball courts, two basketball courts, two tennis courts, one badminton court, two cricket grounds, two football fields, three kabaddi courts, one tenni-koi court, two kho-kho courts, as well as facilities for indoor games and yoga.
+---
+Attendance details for students:total number of working days for a semester is 92.
+Attendance details for staff:total number of leave is 12 days for a academic year.
+---
