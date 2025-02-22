@@ -8,7 +8,7 @@ import operation.fileoperations
 import os
 from groq import Groq
 
-os.environ["GROQ_API_KEY"] = "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"
+os.environ["GROQ_API_KEY"] = "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"
 
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 model_with_apikey={
@@ -153,7 +153,7 @@ def retrive_sql_query(prompt, context):
 
     prompt_role = 'student counsellor' if formatted_role == 'student' else 'staff assistant'
     context_with_datetime = f"{context} Today’s date and time: {formatted_datetime}."
-    client = Groq(api_key="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")  # Ensure API key is set if required
+    client = Groq(api_key="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")# Ensure API key is set if required
     try:
         completion = client.chat.completions.create(
             model=model,
