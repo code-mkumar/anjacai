@@ -4189,6 +4189,10 @@ The campus has four in-house student hostel halls for both genders.
 ===Sports===
 A 16-station multi-gym facility has been developed. In addition to this, the campus includes four volleyball courts, two basketball courts, two tennis courts, one badminton court, two cricket grounds, two football fields, three kabaddi courts, one tenni-koi court, two kho-kho courts, as well as facilities for indoor games and yoga.
 ---
+Internal Mark details for Ayya Nadar janaki Ammal College
+For Ug: internal assessment exam(25),quiz(5),assignment(10).total internal mark is 40 and total external mark is 60.Pass mark of internal is must above 19 and external mark must be above 21.
+For Pg: internal assessment exam(30),quiz(5),assignment(5),seminar(10).total internal mark is 50 and total external mark is 50.Pass mark of internal is must above 23 and external mark must be above 27.  
+---
 Attendance details for students:total number of working days for a semester is 92.
 Attendance details for staff:total number of leave is 12 days for a academic year.
 ---
