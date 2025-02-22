@@ -18,13 +18,17 @@ model_with_apikey={
 # LM Studio API endpoint
 LM_STUDIO_API_URL = "http://127.0.0.1:1234/v1/chat/completions"
 
-sql_model = {"llama-3.1-8b-instant":0, "llama-3.1-8b-instant":0}
+sql_model = {"llama-3.3-70b-versatile":0, "llama-3.3-70b-versatile":0}
 # query_model = ["meta-llama-3.1-8b-instruct@q4_k_m", "meta-llama-3.1-8b-instruct@q4_k_m:2", "meta-llama-3.1-8b-instruct@q4_k_m:3"]
 query_model = {
-    "llama-3.1-8b-instant":0,
-    "llama-3.1-8b-instant":0,
-    "llama-3.1-8b-instant":0,
-    "llama-3.1-8b-instant":0
+    #"llama-3.1-8b-instant":0,
+    #"llama-3.1-8b-instant":0,
+    #"llama-3.1-8b-instant":0,
+    #"llama-3.1-8b-instant":0
+    "llama-3.3-70b-versatile":0,
+    "llama-3.3-70b-versatile":0,
+    "llama-3.3-70b-versatile":0,
+    "llama-3.3-70b-versatile":0
 }
 
 # query_model = {
@@ -153,7 +157,8 @@ def retrive_sql_query(prompt, context):
 
     prompt_role = 'student counsellor' if formatted_role == 'student' else 'staff assistant'
     context_with_datetime = f"{context} Today’s date and time: {formatted_datetime}."
-    client = Groq(api_key="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")# Ensure API key is set if required
+    #client = Groq(api_key="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")# Ensure API key is set if required
+    client=Groq(api_key="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")
     try:
         completion = client.chat.completions.create(
             model=model,
@@ -202,7 +207,8 @@ def backup_sql_query_maker(context,prompt,sql_data,query):
 
     prompt_role = 'student counsellor' if formatted_role == 'student' else 'staff assistant'
     context_with_datetime = f"{context} Today’s date and time: {formatted_datetime}."
-    client = Groq(api_key="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")  # Ensure API key is set if required
+    #client = Groq(api_key="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")  # Ensure API key is set if required
+    client=Groq(api_key="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")
     try:
         completion = client.chat.completions.create(
             model=model,
@@ -255,7 +261,8 @@ def query_lm_studio(prompt, context):
         'AI assistant'
     )
 
-    client = Groq(api_key="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")  # Ensure API key is set if required
+    #client = Groq(api_key="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")  # Ensure API key is set if required
+    client=Groq(api_key="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")
     try:
         completion = client.chat.completions.create(
             model=model,
